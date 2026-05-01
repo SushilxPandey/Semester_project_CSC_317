@@ -1,0 +1,43 @@
+#:kivy 1.0
+#:import get_color_from_hex kivy.utils.get_color_from_hex
+
+<NavBar>:
+    orientation: "horizontal"
+    size_hint_y: None
+    height: "60dp"
+    md_bg_color: get_color_from_hex("#ffffff")
+
+    MDIconButton:
+        icon: "home"
+        size_hint_x: 0.2
+        theme_icon_color: "Custom"
+        icon_color: get_color_from_hex("#5C4FC7") if root.active_screen == "dashboard" else get_color_from_hex("#888888")
+        on_release: root.go_to("dashboard")
+
+    MDIconButton:
+        icon: "format-list-checks"
+        size_hint_x: 0.2
+        theme_icon_color: "Custom"
+        icon_color: get_color_from_hex("#5C4FC7") if root.active_screen == "tasks" else get_color_from_hex("#888888")
+        on_release: root.go_to("tasks")
+
+    MDIconButton:
+        icon: "calendar-month"
+        size_hint_x: 0.2
+        theme_icon_color: "Custom"
+        icon_color: get_color_from_hex("#5C4FC7") if root.active_screen == "schedule" else get_color_from_hex("#888888")
+        on_release: root.go_to("schedule")
+
+    MDIconButton:
+        icon: "account-group"
+        size_hint_x: 0.2
+        theme_icon_color: "Custom"
+        icon_color: get_color_from_hex("#5C4FC7") if root.active_screen == "events" else get_color_from_hex("#888888")
+        on_release: root.go_to("events")
+    
+    MDIconButton:
+        icon: "cog"
+        size_hint_x: 0.2
+        theme_icon_color: "Custom"
+        icon_color: get_color_from_hex("#5C4FC7") if root.active_screen == "settings" else get_color_from_hex("#888888")
+        on_release: root.go_to("settings")

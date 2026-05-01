@@ -1,0 +1,179 @@
+#:kivy 1.0
+#:import get_color_from_hex kivy.utils.get_color_from_hex
+
+<DashboardScreen>:
+    MDBoxLayout:
+        orientation: "vertical"
+
+        MDBoxLayout:
+            orientation: "vertical"
+            md_bg_color: get_color_from_hex("#1a8f6f")
+            size_hint_y: None
+            height: "130dp"
+            padding: "20dp"
+
+            MDBoxLayout: 
+                orientation: "horizontal"
+
+                MDBoxLayout:
+                    orientation: "vertical"
+                    spacing: "-4dp"
+
+                    MDLabel:
+                        id: date_label
+                        text: ""
+                        font_style: "Body2"
+                        theme_text_color: "Custom"
+                        text_color: get_color_from_hex("#ffffff")
+                    
+                    MDLabel:
+                        id: greeting_label
+                        text: ""
+                        font_style: "H6"
+                        bold: True
+                        theme_text_color: "Custom"
+                        text_color: get_color_from_hex("#ffffff")
+
+                
+                #Avatar circle with initials
+                MDCard:
+                    size_hint: None, None
+                    size: "48dp", "48dp"
+                    radius: [24]
+                    md_bg_color: get_color_from_hex("#2db38a")
+                    pos_hint: {"center_y": 0.5}
+
+                    MDLabel:
+                        id: avatar
+                        text: ""
+                        halign: "center"
+                        valign: "middle"
+                        size_hint: None, None
+                        bold: True
+                        theme_text_color: "Custom"
+                        text_color: get_color_from_hex("#ffffff")
+                        size_hint: -1, 1
+
+        #---Overview Stats ---   
+        MDBoxLayout:
+            orientation: "horizontal"
+            size_hint_y: None
+            height: "80dp"
+            padding: "10dp"
+            spacing: "10dp"
+
+            MDCard:
+                orientation: "vertical"
+                md_bg_color: get_color_from_hex("#acf1d9")
+                radius: [12]
+                padding: "10dp"
+
+                MDLabel:
+                    id: task_due_label
+                    text: "0"
+                    halign: "center"
+                    font_style: "H5"
+                    bold: True
+                
+                MDLabel:
+                    text: "Tasks Due"
+                    halign: "center"
+                    font_style: "Caption"
+            
+            MDCard:
+                orientation: "vertical"
+                md_bg_color: get_color_from_hex("#e5e5e5")
+                radius: [12]
+                padding: "10dp"
+
+                MDLabel:
+                    text: "0"
+                    halign: "center"
+                    font_style: "H5"
+                    bold: True
+                
+                MDLabel:
+                    text: "Classes"
+                    halign: "center"
+                    font_style: "Caption"
+
+            MDCard:
+                orientation: "vertical"
+                md_bg_color: get_color_from_hex("#b2a5ff")
+                radius: [12]
+                padding: "10dp"
+
+                MDLabel:
+                    id: events_label
+                    text: "0"
+                    halign: "center"
+                    font_style: "H5"
+                    bold: True
+
+                MDLabel:
+                    text: "Events"
+                    halign: "center"
+                    font_style: "Caption"
+                
+        #---Agenda---
+        ScrollView:
+            MDBoxLayout:
+                orientation: "vertical"
+                padding: "16dp"
+                spacing: "10dp"
+                size_hint_y: None
+                height: self.minimum_height
+
+                MDLabel:
+                    text: "Today's agenda"
+                    font_style: "Subtitle1"
+                    bold: True
+                    size_hint_y: None
+                    height: "30dp"
+
+                MDLabel:
+                    id: agenda_label
+                    text: "No tasks for today!!🎉🎉"
+                    halign: "center"
+                    theme_text_color: "Secondary"
+                    size_hint_y: None
+                    height: "40dp"
+
+
+        #---Progress Bar Construction---
+        MDBoxLayout:
+            orientation: "vertical"
+            size_hint_y: None
+            height: "70dp"
+            padding: ["16dp", "8dp"]
+            spacing: "4dp"
+
+            MDBoxLayout:
+                orientation: "horizontal"
+
+                MDLabel:
+                    text: "Task Completion"
+                    font_style: "Body2"
+                    bold: True
+                    size_hint_y: None
+                    height: "20dp"
+                
+                MDLabel:
+                    id: progress_label
+                    text: "0/0 done"
+                    halign: "right"
+                    font_style: "Body2"
+                    size_hint_y: None
+                    height: "20dp"
+
+            ProgressBar:
+                id: progress_bar
+                max: 100            #in terms of percentage
+                value: 0            #still in percentage
+                size_hint_y: None
+                height: "12dp"
+
+        #adding navigation bar at the end
+        NavBar:
+            active_screen: "dashboard"
+

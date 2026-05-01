@@ -1,0 +1,79 @@
+#:kivy 1.0
+#:import get_color_from_hex kivy.utils.get_color_from_hex
+
+<EventsScreen>:
+    MDBoxLayout:
+        orientation: "vertical"
+
+        # Starting the header
+        MDBoxLayout:
+            orientation: "vertical"
+            md_bg_color: get_color_from_hex("#b71c1c")
+            size_hint_y: None
+            height: "110dp"
+            padding: "16dp"
+            spacing: "8dp"
+
+            MDLabel:
+                text: "Events & Announcements"
+                font_style: "H6"
+                bold: True
+                theme_text_color: "Custom"
+                text_color: get_color_from_hex("#ffffff")
+
+            # Search Bar inside the header
+            MDTextField:
+                id: search_field
+                hint_text: "Search events"
+                mode: "rectangle"
+                size_hint_y: None
+                height: "40dp"
+                on_text: root.search()
+
+        
+        # filter
+        MDBoxLayout:
+            orientation: "horizontal"
+            size_hint_y: None
+            height: "48dp"
+            padding: "8dp"
+            spacing: "8dp"
+
+            MDRaisedButton:
+                id: btn_all
+                text: "All"
+                size_hint_x: None
+                width: "80dp"
+                md_bg_color: get_color_from_hex("#b71c1c")      #this is active button by default
+                on_release: root.filter_events("all")
+            
+            MDRaisedButton:
+                id: btn_upcoming
+                text: "Upcoming"
+                size_hint_x: None
+                width: "100dp"
+                md_bg_color: get_color_from_hex("#E0E0E0")
+                on_release: root.filter_events("upcoming")
+            
+            MDRaisedButton:
+                id: btn_today
+                text: "Today"
+                size_hint_x: None
+                width: "80dp"
+                md_bg_color: get_color_from_hex("#E0E0E0")
+                on_release: root.filter_events("today")
+
+        # List of the events
+        ScrollView:
+            MDBoxLayout:
+                id: event_list
+                orientation: "vertical"
+                padding: "12dp"
+                spacing: "10dp"
+                size_hint_y: None
+                height: self.minimum_height
+
+        #   Navigation Bar
+
+        NavBar:
+            active_screen: "events"

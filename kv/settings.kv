@@ -1,0 +1,221 @@
+#:kivy 1.0
+#:import get_color_from_hex kivy.utils.get_color_from_hex
+#:import AnchorLayout kivy.uix.anchorlayout.AnchorLayout
+
+<SettingsScreen>:
+    MDBoxLayout:
+        orientation: "vertical"
+
+        #header
+        MDBoxLayout:
+            orientation: "vertical"
+            md_bg_color: get_color_from_hex("#4c4c4c")
+            size_hint_y: None
+            height: "80dp"
+            padding: "20dp"
+
+            MDLabel:
+                text: "Settings"
+                font_style: "H6"
+                bold: True
+                theme_text_color: "Custom"
+                text_color: get_color_from_hex("#ffffff")
+        
+        # Personal Information Section
+        MDCard:
+            orientation: "horizontal"
+            size_hint_y: None
+            height: "72dp"
+            radius: [10]
+            padding: "12dp"
+            spacing: "12dp"
+            elevation: 1
+        
+            MDCard:
+                size_hint: None, None
+                size: "44dp", "44dp"
+                radius: [22]
+                md_bg_color: get_color_from_hex("#7986cb")
+
+                MDLabel:
+                    id: avatar_label
+                    text: ""
+                    halign: "center"
+                    valign: "middle"
+                    bold: True
+                    theme_text_color: "Custom"
+                    text_color: get_color_from_hex("#ffffff")
+
+            MDBoxLayout:
+                orientation: "vertical"
+
+                MDLabel:
+                    id: name_label
+                    text: ""
+                    font_style: "Body1"
+                    bold: True
+
+                MDLabel:
+                    id: student_id_label
+                    text: ""
+                    font_style: "Caption"
+                    theme_text_color: "Secondary"
+
+
+        #Scrollable window for the options
+        ScrollView:
+            MDBoxLayout:
+                orientation: "vertical"
+                padding: "16dp"
+                spacing: "12dp"
+                size_hint_y: None
+                height: self.minimum_height
+
+                #Appearence Section
+                MDLabel:
+                    text: "APPEARENCE"
+                    font_style: "Caption"
+                    theme_text_color: "Secondary"
+                    size_hint_y: None
+                    height: "24dp"
+
+                #theme toggles
+                MDBoxLayout:
+                    orientation: "horizontal"
+                    size_hint_y: None
+                    height: "56dp"
+                    padding: ["0dp", "0dp", "16dp", "0dp"]
+
+                    MDBoxLayout:
+                        orientation: "vertical"
+                        size_hint_x: 1
+
+                        MDLabel:
+                            text: "Color Theme"
+                            font_style: "Body2"
+                            bold: True
+
+                        MDLabel:
+                            text: "Light / Dark mode"
+                            font_style: "Caption"
+                            theme_text_color: "Secondary"
+                    
+                    AnchorLayout:
+                        anchor_x: "center"
+                        anchor_y: "center"
+                        size_hint_x: None
+                        width: "50dp"
+
+                        MDSwitch:
+                            id: theme_switch
+                            size_hint: None, None
+                            size: "50dp", "30dp"
+                            pos_hint: {"center_y": 0.5}
+                            on_active: root.toggle_theme(self.active)
+                
+                #Font size
+                MDBoxLayout:
+                    orientation: "horizontal"
+                    size_hint_y: None
+                    height: "48dp"
+
+                    MDBoxLayout:
+                        orientation: "vertical"
+                        
+                        MDLabel:
+                            text: "Font Size"
+                            font_style: "Body2"
+                            bold: True
+                        
+                        MDLabel:
+                            text: "Small / Medium / Large"
+                            font_style: "Caption"
+                            theme_text_color: "Secondary"
+                    
+                    MDRaisedButton:
+                        id: font_btn
+                        text: "Medium"
+                        size_hint_x: None
+                        width: "90dp"
+                        md_bg_color: get_color_from_hex("#424242")
+                        on_release: root.cycle_font_size()
+                
+                # Notification Section
+                MDLabel:
+                    text: "NOTIFICATIONS"
+                    font_style: "Caption"
+                    theme_text_color: "Secondary"
+                    size_hint_y: None
+                    height: "24dp"
+
+                MDBoxLayout:
+                    orientation: "horizontal"
+                    size_hint_y: None
+                    height: "56dp"
+                    padding: ["0dp", "0dp", "16dp", "0dp"]
+
+                    MDBoxLayout:
+                        orientation: "vertical"
+                        size_hint_x: 1
+
+                        MDLabel:
+                            text: "Task Reminders"
+                            font_style: "Body2"
+                            bold: True
+
+                        MDLabel:
+                            text: "15 minutes before due time"
+                            font_style: "Caption"
+                            theme_text_color: "Secondary"
+                    
+                    AnchorLayout:
+                        anchor_x: "center"
+                        anchor_y: "center"
+                        size_hint_x: None
+                        width: "50dp"
+
+                        MDSwitch:
+                            id: notif_switch
+                            size_hint: None, None
+                            size: "50dp", "30dp"
+                            pos_hint: {"center_y": 0.5}
+                            on_active: root.save_notif_settings()
+
+                #  Account Section 
+                MDLabel:
+                    text: "ACCOUNT"
+                    font_style: "Caption"
+                    theme_text_color: "Secondary"
+                    size_hint_y: None
+                    height: "24dp"
+
+                # Reset
+                MDBoxLayout:
+                    orientation: "horizontal"
+                    size_hint_y: None
+                    height: "48dp"
+
+                    MDLabel:
+                        text: "Reset all settings"
+                        font_style: "Body2"
+                        bold: True
+
+                    MDFlatButton:
+                        text: "Reset"
+                        theme_text_color: "Custom"
+                        text_color: get_color_from_hex("#b71c1c")
+                        on_release: root.reset_settings()
+
+                # Logout
+                MDRaisedButton:
+                    text: "Log out"
+                    md_bg_color: get_color_from_hex("#ffffff")
+                    theme_text_color: "Custom"
+                    text_color: get_color_from_hex("#b71c1c")
+                    size_hint_x: 0.5
+                    pos_hint: {"center_x": 0.5}
+                    on_release: root.logout()
+
+        # --- NavBar ---
+        NavBar:
+            active_screen: "settings"

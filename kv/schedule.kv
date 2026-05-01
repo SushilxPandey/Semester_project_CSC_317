@@ -1,0 +1,96 @@
+#:kivy 1.0
+#:import get_color_from_hex kivy.utils.get_color_from_hex
+
+<ScheduleScreen>:
+    MDBoxLayout:
+        orientation: "vertical"
+
+        # Header
+        MDBoxLayout:
+            orientation: "horizontal"
+            md_bg_color: get_color_from_hex("#2255cc")
+            size_hint_y: None
+            height: "70dp"
+            padding: "20dp"
+            spacing: "10dp"
+
+            MDIconButton:
+                icon: "arrow-left"
+                theme_icon_color: "Custom"
+                icon_color: get_color_from_hex("#ffffff")
+                on_release: root.prev_week()
+
+            MDLabel:
+                text: "Schedule"
+                font_style: "H6"
+                bold: True
+                theme_text_color: "Custom"
+                text_color: get_color_from_hex("#ffffff")
+
+            MDIconButton:
+                icon: "arrow-right"
+                theme_icon_color: "Custom"
+                icon_color: get_color_from_hex("#ffffff")
+                on_release: root.next_week()
+
+        # Fixed Top row 
+        MDBoxLayout:
+            orientation: "horizontal"
+            size_hint_y: None
+            height: "48dp"
+
+            #corner cell - always visible
+            MDLabel:
+                size_hint_x: None
+                width: "44dp"
+            
+            #Day headers - these only scroll horizontally
+            ScrollView:
+                id: header_scroll
+                do_scroll_x: True
+                do_scroll_y: False
+                size_hint_y: None
+                height: "48dp"
+
+                MDBoxLayout:
+                    id: day_header
+                    orientation: "horizontal"
+                    size_hint_x: None
+                    width: "756dp"
+                    height: "48dp"
+        
+        # Main Area 
+        MDBoxLayout:
+            orientation: "horizontal"
+
+            #Time Column - this scrolls only vertically
+            ScrollView:
+                id: time_scroll
+                do_scroll_x: False
+                do_scroll_y: True
+                size_hint_x: None
+                width: "44dp"
+
+                MDBoxLayout:
+                    id: time_column
+                    orientation: "vertical"
+                    size_hint_y: None
+                    height: self.minimum_height
+                
+            #Grid - this scrolls in both direction
+            ScrollView:
+                id: grid_scroll
+                do_scroll_x: True
+                do_scroll_y: True
+
+                GridLayout:
+                    id: schedule_grid
+                    cols: 7
+                    size_hint: None, None
+                    width: "756dp"
+                    height: self.minimum_height
+                    row_default_height: "56dp"
+                    row_force_default: True
+        NavBar:
+            active_screen: "schedule"
+

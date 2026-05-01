@@ -1,0 +1,102 @@
+#:kivy 1.0
+#:import get_color_from_hex kivy.utils.get_color_from_hex
+
+
+<LoginScreen>:
+    MDBoxLayout:
+        orientation: "vertical"
+        md_bg_color: get_color_from_hex("#d4d4d4")
+
+        # ---Header---
+        MDBoxLayout:
+            orientation: "vertical"
+            md_bg_color: get_color_from_hex("#5C4FC7")
+            size_hint_y: None
+            height: "200dp"
+            padding: "20dp"
+
+            MDLabel:
+                text: "✦"     #will put a logo here in the future
+                halign: "center"
+                font_style: "H3"
+                theme_text_color: "Custom"
+                text_color: get_color_from_hex("#f1f1f1")
+            
+            MDLabel:
+                text: "CollegeLife"
+                halign: "center"
+                font_style: "H5"
+                bold: True
+                theme_text_color: "Custom"
+                text_color: get_color_from_hex("#ffffff")
+            
+            MDLabel:
+                text: "Your Campus Companion"
+                halign: "center"
+                font_style: "Caption"
+                theme_text_color: "Custom"
+                text_color: get_color_from_hex("#f1f1f1")
+            
+            # ---From Area---
+        MDBoxLayout:
+            orientation: "vertical"
+            padding: "30dp"
+            spacing: "12dp"
+
+            MDTextField:
+                id: email_field
+                hint_text: "student@university.edu"
+                mode: "rectangle"
+
+            MDTextField:
+                id: password_field
+                hint_text: "Password"
+                password: True
+                mode: "rectangle"
+
+            MDBoxLayout:
+                orientation: "horizontal"
+                size_hint_y: None
+                height: "30dp"
+                spacing: "8dp"
+
+                MDCheckbox:
+                    id: show_password
+                    size_hint: None, None
+                    size: "30dp", "30dp"
+                    on_active: root.toggle_password(self.active)
+
+                MDLabel: 
+                    text: "Show Password"
+                    font_style: "Caption"
+
+            MDLabel:
+                text: "Forgot Password?"
+                halign: "right"
+                theme_text_color: "Custom"
+                text_color: get_color_from_hex("#2106ec") 
+
+            MDRaisedButton:
+                text: "Log in"
+                md_bg_color: get_color_from_hex("#4c00ff")
+                size_hint_x: 1
+                on_release: root.on_login()
+            
+            MDFlatButton:
+                text: "Don't have an account? Sign up"
+                halign: "center"
+                theme_text_color: "Custom"
+                text_color: get_color_from_hex("#2106ec")
+                on_release: root.go_to_signup()
+            
+            MDLabel:
+                id: error_label
+                text: ""
+                halign: "center"
+                theme_text_color: "Custom"
+                text_color: get_color_from_hex("#ff0000")
+                size_hint_y: None
+                height: "25dp"
+            
+
+

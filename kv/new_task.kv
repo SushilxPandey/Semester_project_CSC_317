@@ -1,0 +1,145 @@
+#:kivy 1.0
+#:import get_color_from_hex kivy.utils.get_color_from_hex
+
+<NewTaskScreen>:
+    MDBoxLayout:
+        orientation: "vertical"
+        
+        #---Header---
+        MDBoxLayout:
+            orientation: "horizontal"
+            md_bg_color: get_color_from_hex("#b37a05")
+            size_hint_y: None
+            height: "70dp"
+            padding: "20dp"
+            spacing: "10dp"
+
+            MDIconButton:
+                icon: "arrow-left"
+                theme_icon_color: "Custom"
+                icon_color: get_color_from_hex("#ffffff")
+                on_release: root. go_back()
+
+            MDLabel:
+                text: "New Task"
+                font_style: "H6"
+                bold: True
+                theme_text_color: "Custom"
+                text_color: get_color_from_hex("#ffffff")
+
+            MDFlatButton:
+                text: "Save"
+                theme_text_color: "Custom"
+                text_color: get_color_from_hex("#ffffff")
+                on_release: root.save_item()
+
+        #---Scrollable Form---
+        ScrollView:
+            MDBoxLayout:
+                orientation: "vertical"
+                padding: "24dp"
+                spacing: "16dp"
+                size_hint_y: None
+                height: self.minimum_height
+                
+                #___Task Body___
+                MDTextField:
+                    id: task_body
+                    hint_text: "Title"
+                    mode: "rectangle"
+                
+                MDTextField:
+                    id: description_box
+                    hint_text: "Description"
+                    mode: "rectangle"
+                    multiline: True
+                    size_hint_y: None
+                    height: "90dp"
+
+                MDTextField:
+                    id: due_date_field
+                    hint_text: "Due date (YYYY-MM-DD)"
+                    mode: "rectangle"
+                    icon_right: "calendar"
+
+                MDBoxLayout:
+                    orientation: "horizontal"
+                    size_hint_y: None
+                    height: "48dp"
+                    spacing: "8dp"
+
+                    MDTextField:
+                        id: due_time_field
+                        hint_text: "HH:MM"
+                        mode: "rectangle"
+                        input_filter: "int"    #only allows numbers
+
+                    MDRaisedButton:
+                        id: am_pm_btn
+                        text: "AM"
+                        size_hint_x: None
+                        width: "70dp"
+                        md_bg_color: get_color_from_hex("#b37a05")
+                        on_release: root.toggle_am_pm()
+                
+                #___Priority Selection___
+                MDLabel:
+                    text: "Priority"
+                    font_style: "Body2"
+                    size_hint_y: None
+                    height: "24dp"
+
+                MDBoxLayout:
+                    orientation: "horizontal"
+                    size_hint_y: None
+                    height: "44dp"
+                    spacing: "10dp"
+
+                    MDRaisedButton:
+                        id: btn_low
+                        text: "Low"
+                        size_hint_x: None
+                        width: "80dp"
+                        md_bg_color: get_color_from_hex("#aaaaaa")
+                        on_release: root.set_priority("Low")
+
+                    MDRaisedButton:
+                        id: btn_medium
+                        text: "Medium"
+                        size_hint_x: None
+                        width: "90dp"
+                        md_bg_color: get_color_from_hex("#b37a05")   #default priority
+                        on_release: root.set_priority("Medium")
+                    
+                    MDRaisedButton:
+                        id: btn_high
+                        text: "High"
+                        size_hint_x: None
+                        width: "80dp"
+                        md_bg_color: get_color_from_hex("#aaaaaa")
+                        on_release: root.set_priority("High")
+                
+                #___Reminder___
+                MDBoxLayout:
+                    orientation: "horizontal"
+                    size_hint_y: None
+                    height: "44dp"
+                    spacing: "10dp"
+
+                    MDCheckbox:
+                        id: reminder_checkbox
+                        size_hint: None, None
+                        size: "36dp", "36dp"
+
+                    MDLabel:
+                        text: "Enable Reminder"
+                        font_style: "Body2"
+                
+                MDLabel:
+                    id: error_label
+                    text: ""
+                    halign: "center"
+                    theme_text_color: "Custom"
+                    text_color: get_color_from_hex("#ff0000")
+                    size_hint_y: None
+                    height: "25dp"

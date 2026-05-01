@@ -1,0 +1,90 @@
+#:kivy 1.0
+#:import get_color_from_hex kivy.utils.get_color_from_hex
+
+<SignupScreen>:
+    MDBoxLayout:
+        orientation: "vertical"
+        md_bg_color: get_color_from_hex("#d6d6d6")
+
+        #---Header---
+        MDBoxLayout:
+            orientation: "horizontal"
+            md_bg_color: get_color_from_hex("#5C4FC7")
+            size_hint_y: None
+            height: "70dp"
+            padding: "20dp"
+            spacing: "10dp"
+
+            MDIconButton:
+                icon: "arrow-left"  
+                theme_icon_color: "Custom"
+                icon_color: get_color_from_hex("#ffffff")
+                on_release: root.go_back()
+            
+            MDLabel:
+                text: "Create Account"
+                font_style: "H6"
+                bold: True
+                theme_text_color: "Custom"
+                text_color: get_color_from_hex("#ffffff")
+
+        #---Scrollable Form---
+        ScrollView:
+            MDBoxLayout:
+                orientation: "vertical"
+                padding: "30dp"
+                spacing: "14dp"
+                size_hint_y: None
+                height: self.minimum_height           
+
+                MDTextField:
+                    id: full_name_field
+                    hint_text: " Full Name"
+                    mode: "rectangle"
+
+                MDTextField:
+                    id: email_field
+                    hint_text: "University email"
+                    mode: "rectangle"
+            
+                MDTextField:
+                    id: student_id_field
+                    hint_text: "w12345678"
+                    mode: "rectangle"
+
+                MDTextField:
+                    id: password_field
+                    hint_text: "Password"
+                    password: True
+                    mode: "rectangle"
+
+                MDBoxLayout:
+                    orientation: "horizontal"
+                    size_hint_y: None
+                    height: "30dp"
+                    spacing: "8dp"
+
+                    MDCheckbox:
+                        id: show_password
+                        size_hint: None, None
+                        size: "30dp", "30dp"
+                        on_active: root.toggle_password(self.active)
+
+                    MDLabel: 
+                        text: "Show Password"
+                        font_style: "Caption"
+
+                MDRaisedButton:
+                    text: "Create Account"
+                    md_bg_color: get_color_from_hex("#4c00ff")
+                    size_hint_x: 1
+                    on_release: root.on_register()
+
+                MDLabel:
+                    id: error_label
+                    text: ""
+                    halign: "center"
+                    theme_text_color: "Custom"
+                    text_color: get_color_from_hex("#ff0000")
+                    size_hint_y: None
+                    height: "25dp"

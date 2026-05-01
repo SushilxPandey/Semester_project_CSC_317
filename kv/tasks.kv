@@ -1,0 +1,78 @@
+#: kivy 1.0
+#:import get_color_from_hex kivy.utils.get_color_from_hex
+
+<TasksScreen>:
+    MDBoxLayout:
+        orientation: "vertical"
+
+        #---Header---
+        MDBoxLayout:
+            orientation: "horizontal"
+            md_bg_color: get_color_from_hex("#b37a05")
+            size_hint_y: None
+            height: "70dp"
+            padding: "20dp"
+
+            MDLabel: 
+                text: "Task Manager"
+                font_style: "H6"
+                bold: True
+                theme_text_color: "Custom"
+                text_color: get_color_from_hex("#ffffff")
+
+            MDIconButton:
+                icon: "plus"
+                theme_icon_color: "Custom"
+                icon_color: get_color_from_hex("#ffffff")
+                on_release: root.go_to_new_task()
+
+
+        #---Filter Tabs---
+        MDBoxLayout:
+            orientation: "horizontal"
+            size_hint_y: None
+            height: "48dp"
+            padding: "8dp"
+            spacing: "8dp"
+
+            MDRaisedButton:
+                id: btn_all
+                text: "All"
+                size_hint_x: 0.25
+                md_bg_color: get_color_from_hex("#b37a05")
+                on_release: root.filter_tasks("all")
+
+            MDRaisedButton:
+                id: btn_today
+                text: "Today"
+                size_hint_x: 0.25
+                md_bg_color: get_color_from_hex("#cccccc")
+                on_release: root.filter_tasks("today")
+            
+            MDRaisedButton:
+                id: btn_week
+                text: "This Week"
+                size_hint_x: 0.25
+                md_bg_color: get_color_from_hex("#cccccc")
+                on_release: root.filter_tasks("week")
+
+            MDRaisedButton:
+                id: btn_done
+                text: "Done"
+                size_hint_x: 0.25
+                md_bg_color: get_color_from_hex("#cccccc")
+                on_release: root.filter_tasks("done")
+
+        #---Core Tasks List---
+        ScrollView:
+            MDBoxLayout:
+                id: task_list
+                orientation: "vertical"
+                padding: "12dp"
+                spacing: "8dp"
+                size_hint_y: None
+                height: self.minimum_height
+
+        #---NavBar----
+        NavBar:
+            active_screen: "tasks"
