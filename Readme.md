@@ -45,8 +45,7 @@ CollegeLife is a desktop application built to help college students manage their
 
 **1. Clone the repository**
 ```bash
-git clone https://github.com/your-repo/collegelife.git
-cd collegelife
+git clone https://github.com && cd Semester_project_CSC_317
 ```
 
 **2. Install dependencies**
