@@ -4,8 +4,8 @@
 <NewTaskScreen>:
     MDBoxLayout:
         orientation: "vertical"
-        
-        #---Header---
+
+        # Header 
         MDBoxLayout:
             orientation: "horizontal"
             md_bg_color: get_color_from_hex("#b37a05")
@@ -18,7 +18,7 @@
                 icon: "arrow-left"
                 theme_icon_color: "Custom"
                 icon_color: get_color_from_hex("#ffffff")
-                on_release: root. go_back()
+                on_release: root.go_back()
 
             MDLabel:
                 text: "New Task"
@@ -33,7 +33,7 @@
                 text_color: get_color_from_hex("#ffffff")
                 on_release: root.save_item()
 
-        #---Scrollable Form---
+        # --- Scrollable Form ---
         ScrollView:
             MDBoxLayout:
                 orientation: "vertical"
@@ -41,13 +41,15 @@
                 spacing: "16dp"
                 size_hint_y: None
                 height: self.minimum_height
-                
-                #___Task Body___
+
+                #  Title 
                 MDTextField:
                     id: task_body
                     hint_text: "Title"
                     mode: "rectangle"
-                
+                    multiline: False
+
+                #  Description 
                 MDTextField:
                     id: description_box
                     hint_text: "Description"
@@ -56,12 +58,14 @@
                     size_hint_y: None
                     height: "90dp"
 
+                #  Date 
                 MDTextField:
                     id: due_date_field
                     hint_text: "Due date (YYYY-MM-DD)"
                     mode: "rectangle"
                     icon_right: "calendar"
 
+                #  Time 
                 MDBoxLayout:
                     orientation: "horizontal"
                     size_hint_y: None
@@ -72,7 +76,7 @@
                         id: due_time_field
                         hint_text: "HH:MM"
                         mode: "rectangle"
-                        input_filter: "int"    #only allows numbers
+                        input_filter: "int"
 
                     MDRaisedButton:
                         id: am_pm_btn
@@ -81,8 +85,8 @@
                         width: "70dp"
                         md_bg_color: get_color_from_hex("#b37a05")
                         on_release: root.toggle_am_pm()
-                
-                #___Priority Selection___
+
+                #  Priority 
                 MDLabel:
                     text: "Priority"
                     font_style: "Body2"
@@ -108,9 +112,9 @@
                         text: "Medium"
                         size_hint_x: None
                         width: "90dp"
-                        md_bg_color: get_color_from_hex("#b37a05")   #default priority
+                        md_bg_color: get_color_from_hex("#b37a05")
                         on_release: root.set_priority("Medium")
-                    
+
                     MDRaisedButton:
                         id: btn_high
                         text: "High"
@@ -118,8 +122,8 @@
                         width: "80dp"
                         md_bg_color: get_color_from_hex("#aaaaaa")
                         on_release: root.set_priority("High")
-                
-                #___Reminder___
+
+                # Reminder 
                 MDBoxLayout:
                     orientation: "horizontal"
                     size_hint_y: None
@@ -134,7 +138,8 @@
                     MDLabel:
                         text: "Enable Reminder"
                         font_style: "Body2"
-                
+
+                #  Error Label 
                 MDLabel:
                     id: error_label
                     text: ""
@@ -143,3 +148,4 @@
                     text_color: get_color_from_hex("#ff0000")
                     size_hint_y: None
                     height: "25dp"
+        
