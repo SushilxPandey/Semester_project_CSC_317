@@ -29,7 +29,22 @@ class NewTaskScreen(MDScreen):
     def toggle_am_pm(self):
         current = self.ids.am_pm_btn.text
         self.ids.am_pm_btn.text = "PM" if current == "AM" else "AM"
+    
+    def time_input_filter(self, *args):
+        
+        if len(args) == 2:
+            value, from_undo = args
+        elif len(args) == 3:
+            instance, value, from_undo = args
+        else:
+            return ""
 
+        # Allow only digits and colon
+        if value.isdigit() or value == ":":
+            return value
+
+        return ""
+    
     # Handle priority selection
     def set_priority(self, priority):
         # Store selected priority internally
@@ -80,8 +95,6 @@ class NewTaskScreen(MDScreen):
                 self.ids.error_label.text = "Date format must be YYYY-MM-DD"
                 return
 
-        #  Validate & Convert Time 
-        # User enters: HH:MM + AM/PM
         # We convert it into 24-hour format for storage
         due_time_input = self.ids.due_time_field.text.strip()
         am_pm = self.ids.am_pm_btn.text
